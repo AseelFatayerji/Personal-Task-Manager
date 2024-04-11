@@ -5,7 +5,6 @@ const userRouter = require("./routes/user_Router");
 connected();
 
 const app = express();
-
 app.use("/user", userRouter);
 app.listen(3001, () => {
   console.log("server is running on port 3001");
