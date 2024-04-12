@@ -1,0 +1,57 @@
+input {
+  border: 1px solid #8f9d73;
+  border-radius: 0px 20px 20px 0px;
+  padding: 10px;
+  font-size: 16px;
+}
+button {
+  border-color: transparent;
+  border-radius: 30px;
+  background-color: #8f9d73;
+  color: white;
+  font-size: 16px;
+  padding: 5px;
+  margin: 5px;
+}
+.inputs {
+  text-align: center;
+  margin: 10px;
+}
+.icon {
+  border-radius: 20px 0px 0px 20px;
+  background-color: #8f9d73;
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  text-align: center;
+}
+.card {
+  border-radius: 22px;
+  border: 2px solid #8f9d73;
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+  position: fixed;
+  left: 40%;
+  top: 20%;
+}
+
+.card-header {
+  border-radius: 18px 18px 0px 0px;
+  background-color: #8f9d73;
+  color: white;
+  font-size: 26px;
+  padding: 10px;
+  text-align: center;
+}
+.card-body {
+  align-content: center;
+  border-radius: 0px 0px 18px 18px;
+  padding: 10px;
+  text-align: center;
+}
+.links {
+  padding: 10px;
+  color: black;
+}

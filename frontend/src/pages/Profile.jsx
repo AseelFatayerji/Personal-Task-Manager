@@ -1,15 +1,13 @@
 import Navbar from "../components/Navbar";
+import "../styles/utility.css";
 
-function Profile
-() {
+function Profile() {
   return (
-    <div>
-      <Navbar />
-      Profile
-      
+    <div className="float gap">
+      <Navbar/>
+      <div>Profile</div>
     </div>
   );
 }
 
-export default Profile
-;
+export default Profile;

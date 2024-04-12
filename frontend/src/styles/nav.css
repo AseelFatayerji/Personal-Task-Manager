@@ -1,0 +1,29 @@
+nav{
+    background-color: black;
+    border-radius: 0px 10px 10px 0px;
+    border-color: transparent;
+    color: whitesmoke;
+    font-size: 20px;
+    padding: 10px;
+    width:fit-content;
+    height:100vh;
+}
+
+nav ul{
+    height:100%; 
+    list-style-type: none;
+    padding: 0px;
+}
+nav ul li {
+    align-self: center;
+    margin: 10px;
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+}
+
+.navbar{
+    height: 100%;
+}

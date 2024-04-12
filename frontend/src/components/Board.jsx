@@ -3,7 +3,9 @@
 function Board(){
     return(
         <div>
-            Board
+            <div className="float space-between">
+            <div>Todo</div>
+            <div>create</div></div>
         </div>
     )
 }

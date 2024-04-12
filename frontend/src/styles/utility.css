@@ -1,0 +1,11 @@
+
+.float{
+    display: flex;
+}
+
+.space-between{
+    justify-content: space-between;
+}
+.gap{
+    gap: 10px;
+}
