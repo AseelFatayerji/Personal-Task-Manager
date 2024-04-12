@@ -14,6 +14,15 @@ function Signup() {
 
   const register = () => {
     if (confirm === password && password !== "") {
+      const url = "//localhost:3001/auth/" + email +"/"+name+ "/" + password;
+    axios
+      .post(url)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   };
 
@@ -79,7 +88,7 @@ function Signup() {
             </div>
           </div>
           <div>
-            <button>Signup</button>
+            <button onClick={register}>Signup</button>
           </div>
         </div>
         <div className="links">

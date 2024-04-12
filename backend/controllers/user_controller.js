@@ -16,6 +16,7 @@ const setValue = (items, value) => {
 };
 
 const getUser = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const users = await User.find({ email: req.params.email });
     return res.json(users);
@@ -24,6 +25,7 @@ const getUser = async (req, res) => {
   }
 };
 const editUser = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const email = { email: req.params.email };
     const item = setValue(req.params.item, req.params.value);
@@ -34,9 +36,10 @@ const editUser = async (req, res) => {
   }
 };
 const deleteUser = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const email = { email: req.params.email };
-    const users = await User.findOneAndDelete(email,{ new: true });
+    const users = await User.findOneAndDelete(email, { new: true });
     return res.json(users);
   } catch (err) {
     return res.status(500).send(err);
