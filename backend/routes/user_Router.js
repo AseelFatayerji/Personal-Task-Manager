@@ -1,13 +1,10 @@
 const express = require("express");
-const { getUser, editUser } = require("../controllers/user_controller");
+const { getUser, editUser, deleteUser } = require("../controllers/user_controller");
 
 const router = express.Router();
 
 router.get("/:email", getUser);
-router.post("/", editUser);
+router.put("/:email/:item/:value", editUser);
 
-router.delete("/:email", (req, res) => {
-  const { email } = req.params;
-  res.send(email);
-});
+router.delete("/:email",deleteUser);
 module.exports = router;

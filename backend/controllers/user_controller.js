@@ -1,27 +1,45 @@
 const User = require("../models/user_model");
 
+const setValue = (items, value) => {
+  if (items === "name") {
+    const temp = { name: value };
+    return temp;
+  }
+  if (items === "email") {
+    const temp = { email: value };
+    return temp;
+  }
+  if (items === "password") {
+    const temp = { password: value };
+    return temp;
+  }
+};
+
 const getUser = async (req, res) => {
   try {
-    const users = await User.find({ email: res.params });
+    const users = await User.find({ email: req.params.email });
     return res.json(users);
   } catch (err) {
     return res.status(500).send("Internal server error");
   }
 };
-const editUser = (req, res) => {
+const editUser = async (req, res) => {
   try {
-    const { item, value, email } = req.params;
-    connection.execute(
-      "UPDATE users SET ? = ? WHERE email = ?",
-      [item, value, email],
-      (error, result) => {
-        if (error) return res.status(500).send(error);
-        return res.json({ info: result });
-      }
-    );
+    const email = { email: req.params.email };
+    const item = setValue(req.params.item, req.params.value);
+    const users = await User.findOneAndUpdate(email, item, { new: true });
+    return res.json(users);
   } catch (err) {
     return res.status(500).send(err);
   }
 };
-
-module.exports = { getUser, editUser };
+const deleteUser = async (req, res) => {
+  try {
+    const email = { email: req.params.email };
+    const users = await User.findOneAndDelete(email,{ new: true });
+    return res.json(users);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
+module.exports = { getUser, editUser, deleteUser };

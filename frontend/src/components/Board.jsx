@@ -1,11 +1,11 @@
 
 
-function Board(){
+function Board({title}){
     return(
-        <div>
-            <div className="float space-between">
-            <div>Todo</div>
-            <div>create</div></div>
+        <div className="task">
+            <div className="task-header float space-between">
+            <div ><label>{title}</label></div>
+            <div><button>Add Task</button></div></div>
         </div>
     )
 }

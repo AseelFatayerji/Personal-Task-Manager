@@ -1,5 +1,5 @@
-Users can login/signup.
-Users can create boards including columns (Todo/In progress…)
+Users can login/signup. frontend done/
+Users can create boards including columns (Todo/In progress…) frontend done/
 Users can create tasks with titles, descriptions, attachments and tags.
 Users can create tags to use them while creating a task (It acts as a category)
 Users should be able to drag tasks between columns or edit the task directly.
