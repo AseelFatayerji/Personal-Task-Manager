@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 function Login() {
   return (
     <div>
-      <Navbar />
       Login
+      <Link to="/signup">No account? <b>Signup</b></Link>
     </div>
   );
 }

@@ -1,12 +1,15 @@
 import Navbar from "../components/Navbar";
 
-function Home() {
+function Profile
+() {
   return (
     <div>
       <Navbar />
-      Home
+      Profile
+      
     </div>
   );
 }
 
-export default Home;
+export default Profile
+;

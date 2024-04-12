@@ -2,6 +2,8 @@ const express = require("express");
 const { connected } = require("./config/db_config");
 const userRouter = require("./routes/user_Router");
 
+require("dotenv").config();
+
 connected();
 
 const app = express();
