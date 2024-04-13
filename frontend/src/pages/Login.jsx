@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,8 @@ import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import "../styles/login.css";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [email, Setemail] = useState("");
   const [password, Setpassword] = useState("");
 
@@ -15,7 +17,13 @@ function Login() {
     axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
+        const info = response.data.user;
+        const token = response.data.token;
+        localStorage.setItem("login", true);
+        localStorage.setItem("name", info.name);
+        localStorage.setItem("token", token);
+        localStorage.setItem("id", info._id);
+        navigate("/" + info.name);
       })
       .catch((err) => {
         console.log(err);

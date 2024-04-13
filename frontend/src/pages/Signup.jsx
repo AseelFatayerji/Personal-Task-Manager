@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios" ;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,7 @@ import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import "../styles/login.css";
 
 function Signup() {
+  const navigate =  useNavigate()
   const [name, Setname] = useState("");
   const [email, Setemail] = useState("");
   const [password, Setpassword] = useState("");
@@ -18,7 +19,13 @@ function Signup() {
     axios
       .post(url)
       .then((response) => {
-        console.log(response.data);
+        const info = response.data.newUser;
+        const token = response.data.token;
+        localStorage.setItem("login", true);
+        localStorage.setItem("name", info.name);
+        localStorage.setItem("token", token);
+        localStorage.setItem("id", info._id);
+        navigate("/" + info.name);
       })
       .catch((err) => {
         console.log(err);

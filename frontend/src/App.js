@@ -1,4 +1,6 @@
 import "./styles/App.css";
+import "./styles/utility.css";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";

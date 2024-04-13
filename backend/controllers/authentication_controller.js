@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const User = require("../models/user_model");
 
 const Login = async (req, res) => {
@@ -8,7 +9,10 @@ const Login = async (req, res) => {
     const user = await User.findOne({ email });
     if (user) {
       if (bcrypt.compare(password, user.password)) {
-        return res.json(user);
+        const token = jwt.sign({ userId: user._id }, "your-secret-key", {
+          expiresIn: "1h",
+        });
+        return res.json({ user, token });
       }
       return res.status(500).send("Internal server error");
     }
@@ -32,7 +36,10 @@ const Signup = async (req, res) => {
       name: name,
       password: hash,
     });
-    return res.status(201).json(newUser);
+    const token = jwt.sign({ userId: newUser._id }, "your-secret-key", {
+      expiresIn: "1h",
+    });
+    return res.status(201).json({ newUser, token });
   } catch (err) {
     console.log(err);
   }

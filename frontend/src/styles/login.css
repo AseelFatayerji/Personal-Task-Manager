@@ -1,18 +1,4 @@
-input {
-  border: 1px solid #8f9d73;
-  border-radius: 0px 20px 20px 0px;
-  padding: 10px;
-  font-size: 16px;
-}
-button {
-  border-color: transparent;
-  border-radius: 30px;
-  background-color: #8f9d73;
-  color: white;
-  font-size: 16px;
-  padding: 5px;
-  margin: 5px;
-}
+
 .inputs {
   text-align: center;
   margin: 10px;

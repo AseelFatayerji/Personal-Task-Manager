@@ -1,11 +1,5 @@
-
-
-function Task(){
-    return(
-        <div>
-            Task
-        </div>
-    )
+function Task({ content }) {
+  return <li>{content}</li>;
 }
 
 export default Task;

@@ -1,29 +1,42 @@
-nav{
-    background-color: black;
-    border-radius: 0px 10px 10px 0px;
-    border-color: transparent;
-    color: whitesmoke;
-    font-size: 20px;
-    padding: 10px;
-    width:fit-content;
-    height:100vh;
+nav {
+  background-color: black;
+  border-radius: 0px 10px 10px 0px;
+  border-color: transparent;
+  color: whitesmoke;
+  font-size: 20px;
+  padding: 5px;
+  position: sticky;
+  width: fit-content;
+  height: 98.5vh;
 }
 
-nav ul{
-    height:100%; 
-    list-style-type: none;
-    padding: 0px;
+nav ul {
+  height: 90%;
+  list-style-type: none;
+  padding: 0px;
 }
 nav ul li {
-    align-self: center;
-    margin: 10px;
+  align-self: center;
+  margin: 10px;
+}
+footer {
+  text-align: center;
+  align-self: center;
 }
 
-.link{
-    text-decoration: none;
-    color: white;
+.link {
+  align-items: center;
+  border-radius: 100%;
+  color: white;
+  font-size: 20px;
+  padding: 5px 8px 5px 8px;
+  text-decoration: none;
+  text-align: center;
 }
-
-.navbar{
-    height: 100%;
+.link:hover {
+  background-color: #8f9d73;
+  cursor: pointer;
+}
+.navbar {
+  height: 100%;
 }

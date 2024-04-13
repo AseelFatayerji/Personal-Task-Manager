@@ -1,11 +1,51 @@
-
-.float{
-    display: flex;
+* {
+  margin: 0;
+}
+body {
+  background-color: #f9fbfc;
+  height: 100vh;
+}
+a {
+  text-decoration: none;
+  color: black;
 }
 
-.space-between{
-    justify-content: space-between;
+input {
+  border: 1px solid #8f9d73;
+  border-radius: 0px 20px 20px 0px;
+  padding: 10px;
+  font-size: 16px;
 }
-.gap{
-    gap: 10px;
+button {
+  border: 2px solid #8f9d73;
+  border-radius: 30px;
+  background-color: #8f9d73;
+  color: white;
+  font-size: 16px;
+  padding: 5px;
+  margin: 5px;
+}
+button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.float {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+.space-even {
+  justify-content: space-even;
+}
+.gap {
+  gap: 10px;
+}
+.gap-3 {
+  gap: 30px;
+}
+.hide {
+  display: none;
 }

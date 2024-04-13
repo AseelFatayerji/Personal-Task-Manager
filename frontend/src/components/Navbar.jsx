@@ -1,29 +1,38 @@
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faChartPie, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
 import "../styles/nav.css";
 
 function Navbar() {
-  const username = "profile";
+  const username = localStorage.getItem("name");
   return (
     <div className="navbar">
       <nav>
         <ul>
           <li>
-            <Link className="link" to={"/" + username}>Profile</Link>
+            <Link className="link" to={"/" + username}>
+              <FontAwesomeIcon icon={faHome}/>
+            </Link>
           </li>
           <li>
-            <Link className="link" to={"/chart"}>Analytics</Link>
+            <Link className="link" to={"/charts"}>
+            <FontAwesomeIcon icon={faChartPie}/>
+            </Link>
           </li>
-          <li>
-            <Link className="link"
+          
+        </ul>
+        <footer>
+            <Link
+              className="link"
               to="/"
               onClick={() => {
                 localStorage.clear();
               }}
             >
-              Logout
+              <FontAwesomeIcon icon={faRightFromBracket } />
             </Link>
-          </li>
-        </ul>
+          </footer>
       </nav>
     </div>
   );
