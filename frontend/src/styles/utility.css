@@ -2,7 +2,7 @@
   margin: 0;
 }
 body {
-  background-color: #f9fbfc;
+  background-color: #dadcdd;
   height: 100vh;
 }
 a {
@@ -33,7 +33,9 @@ button:hover {
 .float {
   display: flex;
 }
-
+.right{
+  justify-content: right;
+}
 .space-between {
   justify-content: space-between;
 }

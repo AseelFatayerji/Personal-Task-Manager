@@ -1,0 +1,57 @@
+.task-inputs {
+  border-radius: 22px;
+  border: 2px solid #8f9d73;
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+  margin: 10px;
+  position: fixed;
+  left: 40%;
+  top: 20%;
+}
+.task-icon {
+  border-radius: 20px 0px 0px 20px;
+  background-color: #8f9d73;
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+  text-align: center;
+}
+.task-inputs inputs {
+  padding: 5px;
+}
+.task-card {
+  height: 100%;
+}
+.task-header {
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
+.list {
+  height: 100%;
+  list-style-type: none;
+  padding: 10px;
+}
+.list li {
+  background-color: white;
+  border-radius: 20px;
+  width: 300px;
+  height: fit-content;
+  padding: 15px;
+  margin: 10px;
+}
+.list li:hover {
+  cursor: grab;
+}
+.list li:active {
+  cursor: grabbing;
+}
+.header {
+  font-size: 20px;
+}
+.body {
+  font-size: 16px;
+}

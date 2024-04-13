@@ -17,7 +17,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/:name" element={<Profile />} />
           <Route path="/charts" element={<Charts />} />
-
         </Routes>
       </BrowserRouter>
     </div>

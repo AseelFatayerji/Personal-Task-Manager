@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
 import Board from "../components/Board";
 import Navbar from "../components/Navbar";
@@ -25,7 +25,9 @@ function Profile() {
   };
   const addBoard = () => {
     const arr = board;
-    const temp = <Board title={title} />;
+    const temp = (
+      <Board title={title} id={"droppable" + arr.length} code={arr.length} />
+    );
     arr.push(temp);
     SetBaords(arr);
     SetHide("hide");
@@ -55,24 +57,40 @@ function Profile() {
   return (
     <div className="float gap">
       <Navbar />
-      <div>
+      <div className="main">
         <div>
-          <button onClick={showPop}>
-            Add Board <FontAwesomeIcon icon={faAdd} />
-          </button>
-          <div className={"float space-even " + hide}>
-            <div>
-              <input type="text" placeholder="title" onChange={(e)=>{SetTitle(e.target.value)}}/>
+          <div className="float right">
+            <FontAwesomeIcon icon={faAdd} onClick={showPop} className="add" />
+          </div>
+
+          <div className={"card " + hide}>
+            <div className="card-header">Add Board</div>
+            <div className="float card-body">
+              <div className="inputs float">
+                <div>
+                  <FontAwesomeIcon icon={faClipboardList} className="icon" />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="title"
+                    onChange={(e) => {
+                      SetTitle(e.target.value);
+                    }}
+                  />
+                </div>
+                <div>
+                  <button onClick={addBoard}>
+                    <FontAwesomeIcon icon={faAdd} />
+                  </button>
+                </div>
+              </div>
             </div>
-            <div></div>
-            <button onClick={addBoard}>
-              <FontAwesomeIcon icon={faAdd} />
-            </button>
           </div>
         </div>
         <div className="float space-even gap boards">
           {board.map((item) => {
-            return <div>{item} </div>;
+            return <div>{item}</div>;
           })}
         </div>
       </div>

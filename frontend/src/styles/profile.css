@@ -1,4 +1,17 @@
-.boards{
-    width: 100vh;
-    overflow-x: auto;
+.main{
+    width: 100%;
+}
+.add {
+  border: 2px solid #8f9d73;
+  border-radius: 100%;
+  background-color: #8f9d73;
+  color: white;
+  font-size: 16px;
+  padding: 5px;
+  margin: 5px;
+}
+.add:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
