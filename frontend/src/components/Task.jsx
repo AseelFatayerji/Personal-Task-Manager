@@ -1,19 +1,15 @@
-import { useDraggable } from "@dnd-kit/core";
-import { CSS } from "@dnd-kit/utilities";
+import { Draggable } from "react-beautiful-dnd";
 
-function Task({ task, content, id }) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useDraggable({
-      id: id,
-    });
-  const style = {
-    transform: CSS.Translate.toString(transform),
-  };
+function Task({ task, content, id, index }) {
   return (
-    <li ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <div className="header">{task}</div>
-      <div className="body">{content}</div>
-    </li>
+    <Draggable key={id} draggableId={id} index={index}>
+      {(provided) => (
+        <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+          <div className="header">{task}</div>
+          <div className="body">{content}</div>
+        </li>
+      )}
+    </Draggable>
   );
 }
 
