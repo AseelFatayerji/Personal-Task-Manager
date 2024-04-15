@@ -4,11 +4,17 @@ import { faAdd, faHeader, faPencil } from "@fortawesome/free-solid-svg-icons";
 
 import Task from "./Task";
 
+import { useDispatch } from "react-redux";
+import { addTask, getTasks, removeTask } from "../store/slices/taskSlice";
+
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 import "../styles/board.css";
 
 function Board({ title, id, code }) {
+  const dispatch = useDispatch();
+
+  console.log(getTasks());
   const [hide, SetHide] = useState("hide");
   const [content, SetContent] = useState("");
   const [taskTitle, SetTaskTitle] = useState("");
@@ -17,7 +23,7 @@ function Board({ title, id, code }) {
   const showPop = () => {
     SetHide("");
   };
-  const addTask = () => {
+  const add_Task = () => {
     const arr = tasks;
     const temp = (
       <Task
@@ -28,9 +34,16 @@ function Board({ title, id, code }) {
         index={tasks.length}
       />
     );
+    const obj = {
+      id: tasks.length,
+      board: code,
+      title: taskTitle,
+      content: content,
+    };
     arr.push(temp);
     SetTask(arr);
     SetHide("hide");
+    dispatch(addTask(obj));
   };
 
   const move = (source, destination, droppableSource, droppableDestination) => {
@@ -113,7 +126,7 @@ function Board({ title, id, code }) {
                 </div>
               </div>
               <div></div>
-              <button onClick={addTask}>Add Task</button>
+              <button onClick={add_Task}>Add Task</button>
             </div>
           </div>
         </div>

@@ -18,7 +18,7 @@ function Profile() {
   const [board, SetBaords] = useState([]);
 
   const token = localStorage.getItem("token");
-  //const id = localStorage.getItem("id");
+  const id = localStorage.getItem("id");
 
 
   const showPop = () => {
@@ -27,7 +27,7 @@ function Profile() {
   const addBoard = () => {
     const arr = board;
     const temp = (
-      <Board title={title} id={title+""+arr.length} code={arr.length} key={title+""+arr.length}/>
+      <Board title={title} id={title} code={arr.length} key={title+""+arr.length}/>
     );
     arr.push(temp);
     SetBaords(arr);
@@ -89,7 +89,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="float space-even gap boards">
+        <div className="float space-around gap-3 boards">
             {board.map((item) => {
               return item
             })}

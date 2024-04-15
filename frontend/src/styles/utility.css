@@ -42,6 +42,9 @@ button:hover {
 .space-even {
   justify-content: space-even;
 }
+.space-around {
+  justify-content: space-around;
+}
 .gap {
   gap: 10px;
 }
