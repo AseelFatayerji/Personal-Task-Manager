@@ -19,7 +19,6 @@ function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const task = useSelector((state) => state.text);
-  console.log(task);
 
   const [hide, SetHide] = useState("hide");
   const [title, SetTitle] = useState("");
@@ -88,7 +87,7 @@ function Profile() {
   };
   const setBaords = () => {
     const boards = removeDuplicates(task);
-    const set = [];
+    const set = board;
     boards.map((items, index) => {
       const temp = (
         <Board
