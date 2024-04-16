@@ -1,34 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// initial global state of the app
-const initialState = {
-  task: [],
-};
+const initialState = [];
 
-// create a slice object
 const taskSlice = createSlice({
   name: "task",
   initialState,
 
-  // creating reducers to manipulate state
   reducers: {
+    reorderTasks: (state, action) => {
+      return action.payload;
+    },
     addTask: (state, action) => {
-      state.task.push(action.payload);
+      return [...state, action.payload];
     },
     removeTask: (state, action) => {
-      state.task.filter((item) => {
+      const temp = state.task.filter((item) => {
         if (item !== action.payload) {
           return item;
         }
-        return;
       });
-    },
-    getTasks: (state = initialState, action) => {
-      return state.task;
+      return temp;
     },
   },
 });
 
-// exporting actions and reducers
-export const { addTask, removeTask, getTasks } = taskSlice.actions;
+export const { addTask, removeTask, reorderTasks } = taskSlice.actions;
 export default taskSlice.reducer;

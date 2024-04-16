@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faHeader, faPencil } from "@fortawesome/free-solid-svg-icons";
 
 import Task from "./Task";
 
-import { useDispatch } from "react-redux";
-import { addTask, getTasks, removeTask } from "../store/slices/taskSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask, reorderTasks } from "../store/slices/taskSlice";
 
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
@@ -13,39 +13,44 @@ import "../styles/board.css";
 
 function Board({ title, id, code }) {
   const dispatch = useDispatch();
-
-  console.log(getTasks());
+  const task = useSelector((state) => state.text);
   const [hide, SetHide] = useState("hide");
   const [content, SetContent] = useState("");
   const [taskTitle, SetTaskTitle] = useState("");
   const [tasks, SetTask] = useState([]);
-
+  
   const showPop = () => {
     SetHide("");
   };
   const add_Task = () => {
-    const arr = tasks;
-    const temp = (
-      <Task
-        content={content}
-        task={taskTitle}
-        id={taskTitle + "" + tasks.length}
-        key={taskTitle + "" + tasks.length}
-        index={tasks.length}
-      />
-    );
     const obj = {
-      id: tasks.length,
-      board: code,
+      board_id: code,
+      board: title,
       title: taskTitle,
       content: content,
     };
-    arr.push(temp);
-    SetTask(arr);
-    SetHide("hide");
     dispatch(addTask(obj));
+    set_Task();
+    SetHide("hide");
   };
-
+  const set_Task = () => {
+    const arr = [];
+    task.map((item, index) => {
+      if (item.board_id === code) {
+        const temp = (
+          <Task
+            content={item.content}
+            task={item.title}
+            id={item.title + "" + index}
+            key={item.title + "" + index}
+            index={index}
+          />
+        );
+        arr.push(temp);
+      }
+    });
+    SetTask(arr);
+  };
   const move = (source, destination, droppableSource, droppableDestination) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
@@ -67,25 +72,26 @@ function Board({ title, id, code }) {
       return;
     }
     if (source.droppableId === destination.droppableId) {
-      const temp = tasks;
+      const temp = [...task];
       const [reordered] = temp.splice(result.source.index, 1);
       temp.splice(result.destination.index, 0, reordered);
-      SetTask(temp);
+      dispatch(reorderTasks(temp));
+      set_Task();
+    } else {
+      const result = move(
+        source.droppableId,
+        destination.droppableId,
+        source,
+        destination
+      );
+      set_Task();
     }
-    // else {
-    //   const result = move(
-    //     this.getList(source.droppableId),
-    //     this.getList(destination.droppableId),
-    //     source,
-    //     destination
-    //   );
-
-    //   this.setState({
-    //     items: result.droppable,
-    //     selected: result.droppable2,
-    //   });
-    // }
   };
+
+  useEffect(() => {
+    set_Task();
+  }, []);
+
   return (
     <div className="task-card">
       <div className="task-header float gap-3 space-between">
@@ -133,7 +139,7 @@ function Board({ title, id, code }) {
       </div>
       <div>
         <DragDropContext onDragEnd={hanedleOnDragEnd}>
-          <Droppable droppableId={id}>
+          <Droppable droppableId={`${id}`}>
             {(provided) => (
               <ul
                 className="list"

@@ -5,6 +5,8 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
+import { useSelector } from "react-redux";
+
 import Board from "../components/Board";
 import Navbar from "../components/Navbar";
 
@@ -12,7 +14,7 @@ import "../styles/profile.css";
 
 function Profile() {
   const navigate = useNavigate();
-
+  const task = useSelector((state) => state.text);
   const [hide, SetHide] = useState("hide");
   const [title, SetTitle] = useState("");
   const [board, SetBaords] = useState([]);
@@ -20,6 +22,9 @@ function Profile() {
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
 
+  const removeDuplicates = (arr) => {
+    return arr.filter((item, index) => arr.indexOf(item) === index);
+  };
 
   const showPop = () => {
     SetHide("");
@@ -27,11 +32,33 @@ function Profile() {
   const addBoard = () => {
     const arr = board;
     const temp = (
-      <Board title={title} id={title} code={arr.length} key={title+""+arr.length}/>
+      <Board
+        title={title}
+        id={title}
+        code={arr.length}
+        key={title + "" + arr.length}
+      />
     );
     arr.push(temp);
     SetBaords(arr);
     SetHide("hide");
+  };
+  const setBaords = () => {
+    const arr = [...task];
+    const boards = removeDuplicates(arr);
+    const set = [];
+    boards.map((items) => {
+      const temp = (
+        <Board
+          title={items.board}
+          id={items.board_id}
+          code={items.board_id}
+          key={items.board_id}
+        />
+      );
+      set.push(temp);
+    });
+    SetBaords(set);
   };
 
   const checkToken = () => {
@@ -54,7 +81,8 @@ function Profile() {
   };
   useEffect(() => {
     checkToken();
-  });
+    setBaords();
+  }, []);
   return (
     <div className="float gap">
       <Navbar />
@@ -90,9 +118,9 @@ function Profile() {
           </div>
         </div>
         <div className="float space-around gap-3 boards">
-            {board.map((item) => {
-              return item
-            })}
+          {board.map((item) => {
+            return item;
+          })}
         </div>
       </div>
     </div>
