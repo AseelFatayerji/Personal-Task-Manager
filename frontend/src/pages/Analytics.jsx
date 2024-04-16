@@ -41,7 +41,7 @@ function Charts() {
     labels: labels.map((item) => item.board),
     datasets: [
       {
-        label: "Tasks in Progress",
+        label: "Total Tasks",
         data: tasks.map((item) => item),
         backgroundColor: [
           "rgba(75,192,192,1)",
