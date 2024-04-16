@@ -7,9 +7,6 @@ const taskSlice = createSlice({
   initialState,
 
   reducers: {
-    reorderTasks: (state, action) => {
-      return action.payload;
-    },
     addTask: (state, action) => {
       return [...state, action.payload];
     },
@@ -21,8 +18,15 @@ const taskSlice = createSlice({
       });
       return temp;
     },
+    reorderTasks: (state, action) => {
+      return action.payload;
+    },
+    switchBoard: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { addTask, removeTask, reorderTasks } = taskSlice.actions;
+export const { addTask, removeTask, reorderTasks, switchBoard } =
+  taskSlice.actions;
 export default taskSlice.reducer;

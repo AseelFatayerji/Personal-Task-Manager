@@ -23,7 +23,15 @@ function Profile() {
   const id = localStorage.getItem("id");
 
   const removeDuplicates = (arr) => {
-    return arr.filter((item, index) => arr.indexOf(item) === index);
+    let unique = [];
+    let ids = [];
+    arr.forEach((element) => {
+      if (!ids.includes(element.board_id)) {
+        ids.push(element.board_id);
+        unique.push(element);
+      }
+    });
+    return unique;
   };
 
   const showPop = () => {
@@ -44,10 +52,10 @@ function Profile() {
     SetHide("hide");
   };
   const setBaords = () => {
-    const arr = [...task];
-    const boards = removeDuplicates(arr);
+    const boards = removeDuplicates(task);
+    console.log(boards);
     const set = [];
-    boards.map((items) => {
+    boards.map((items, index) => {
       const temp = (
         <Board
           title={items.board}

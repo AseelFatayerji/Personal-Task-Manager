@@ -5,7 +5,7 @@ import { faAdd, faHeader, faPencil } from "@fortawesome/free-solid-svg-icons";
 import Task from "./Task";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, reorderTasks } from "../store/slices/taskSlice";
+import { addTask, reorderTasks, switchBoard } from "../store/slices/taskSlice";
 
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
@@ -14,11 +14,12 @@ import "../styles/board.css";
 function Board({ title, id, code }) {
   const dispatch = useDispatch();
   const task = useSelector((state) => state.text);
+  console.log(task);
   const [hide, SetHide] = useState("hide");
   const [content, SetContent] = useState("");
   const [taskTitle, SetTaskTitle] = useState("");
   const [tasks, SetTask] = useState([]);
-  
+
   const showPop = () => {
     SetHide("");
   };
@@ -67,6 +68,7 @@ function Board({ title, id, code }) {
 
   const hanedleOnDragEnd = (result) => {
     const { source, destination } = result;
+    console.log(switchBoard([source.droppableId, destination.droppableId]));
     // dropped outside the list
     if (!destination) {
       return;
@@ -78,13 +80,13 @@ function Board({ title, id, code }) {
       dispatch(reorderTasks(temp));
       set_Task();
     } else {
-      const result = move(
-        source.droppableId,
-        destination.droppableId,
-        source,
-        destination
-      );
-      set_Task();
+      // const result = move(
+      //   source.droppableId,
+      //   destination.droppableId,
+      //   source,
+      //   destination
+      // );
+      // set_Task();
     }
   };
 
