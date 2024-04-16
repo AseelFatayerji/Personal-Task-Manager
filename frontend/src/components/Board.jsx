@@ -5,16 +5,15 @@ import { faAdd, faHeader, faPencil } from "@fortawesome/free-solid-svg-icons";
 import Task from "./Task";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, reorderTasks, switchBoard } from "../store/slices/taskSlice";
+import { addTask} from "../store/slices/taskSlice";
 
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
 
 import "../styles/board.css";
 
 function Board({ title, id, code }) {
   const dispatch = useDispatch();
   const task = useSelector((state) => state.text);
-  console.log(task);
   const [hide, SetHide] = useState("hide");
   const [content, SetContent] = useState("");
   const [taskTitle, SetTaskTitle] = useState("");
@@ -51,43 +50,6 @@ function Board({ title, id, code }) {
       }
     });
     SetTask(arr);
-  };
-  const move = (source, destination, droppableSource, droppableDestination) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
-
-    destClone.splice(droppableDestination.index, 0, removed);
-
-    const result = {};
-    result[droppableSource.droppableId] = sourceClone;
-    result[droppableDestination.droppableId] = destClone;
-
-    return result;
-  };
-
-  const hanedleOnDragEnd = (result) => {
-    const { source, destination } = result;
-    console.log(switchBoard([source.droppableId, destination.droppableId]));
-    // dropped outside the list
-    if (!destination) {
-      return;
-    }
-    if (source.droppableId === destination.droppableId) {
-      const temp = [...task];
-      const [reordered] = temp.splice(result.source.index, 1);
-      temp.splice(result.destination.index, 0, reordered);
-      dispatch(reorderTasks(temp));
-      set_Task();
-    } else {
-      // const result = move(
-      //   source.droppableId,
-      //   destination.droppableId,
-      //   source,
-      //   destination
-      // );
-      // set_Task();
-    }
   };
 
   useEffect(() => {
@@ -140,22 +102,20 @@ function Board({ title, id, code }) {
         </div>
       </div>
       <div>
-        <DragDropContext onDragEnd={hanedleOnDragEnd}>
-          <Droppable droppableId={`${id}`}>
-            {(provided) => (
-              <ul
-                className="list"
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {tasks.map((item) => {
-                  return item;
-                })}
-                {provided.placeholder}
-              </ul>
-            )}
-          </Droppable>
-        </DragDropContext>
+        <Droppable droppableId={`${id}`}>
+          {(provided) => (
+            <ul
+              className="list"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {tasks.map((item) => {
+                return item;
+              })}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
       </div>
     </div>
   );

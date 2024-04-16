@@ -5,7 +5,10 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { reorderTasks, switchBoard } from "../store/slices/taskSlice";
+
+import { DragDropContext } from "react-beautiful-dnd";
 
 import Board from "../components/Board";
 import Navbar from "../components/Navbar";
@@ -14,7 +17,10 @@ import "../styles/profile.css";
 
 function Profile() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const task = useSelector((state) => state.text);
+  console.log(task);
+
   const [hide, SetHide] = useState("hide");
   const [title, SetTitle] = useState("");
   const [board, SetBaords] = useState([]);
@@ -33,7 +39,36 @@ function Profile() {
     });
     return unique;
   };
-
+  const hanedleOnDragEnd = (result) => {
+    const { source, destination } = result;
+    // dropped outside the list
+    if (!destination) {
+      return;
+    }
+    if (source.droppableId === destination.droppableId) {
+      const temp = [...task];
+      const [reordered] = temp.splice(result.source.index, 1);
+      temp.splice(result.destination.index, 0, reordered);
+      dispatch(reorderTasks(temp));
+      setBaords();
+    } else {
+      const newOrder = task.map((item, index) => {
+        if (index !== result.source.index) {
+          return item;
+        } else {
+          const temp = {
+            board_id: parseInt(destination.droppableId),
+            board: item.board,
+            content: item.content,
+            title: item.title,
+          };
+          return temp;
+        }
+      });
+      dispatch(switchBoard(newOrder));
+      setBaords();
+    }
+  };
   const showPop = () => {
     SetHide("");
   };
@@ -53,7 +88,6 @@ function Profile() {
   };
   const setBaords = () => {
     const boards = removeDuplicates(task);
-    console.log(boards);
     const set = [];
     boards.map((items, index) => {
       const temp = (
@@ -126,9 +160,11 @@ function Profile() {
           </div>
         </div>
         <div className="float space-around gap-3 boards">
-          {board.map((item) => {
-            return item;
-          })}
+          <DragDropContext onDragEnd={hanedleOnDragEnd}>
+            {board.map((item) => {
+              return item;
+            })}
+          </DragDropContext>
         </div>
       </div>
     </div>
