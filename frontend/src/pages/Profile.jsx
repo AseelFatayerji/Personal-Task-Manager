@@ -21,6 +21,8 @@ function Profile() {
   const task = useSelector((state) => state.text);
 
   const [hide, SetHide] = useState("hide");
+  const [hideAlert, SetHideAlert] = useState("hide");
+
   const [title, SetTitle] = useState("");
   const [board, SetBaords] = useState([]);
 
@@ -40,7 +42,7 @@ function Profile() {
   };
   const hanedleOnDragEnd = (result) => {
     const { source, destination } = result;
-    // dropped outside the list
+    
     if (!destination) {
       return;
     }
@@ -87,7 +89,7 @@ function Profile() {
   };
   const setBaords = () => {
     const boards = removeDuplicates(task);
-    const set = board;
+    const set = [];
     boards.map((items, index) => {
       const temp = (
         <Board
@@ -108,12 +110,14 @@ function Profile() {
       .get(url)
       .then((resp) => {
         if (resp.status !== 201) {
+          SetHideAlert("")
           setTimeout(() => {
             navigate("/");
           }, 2000);
         }
       })
       .catch((err) => {
+        SetHideAlert("")
         console.log(err);
         setTimeout(() => {
           navigate("/");
@@ -155,6 +159,12 @@ function Profile() {
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className={"alert " + hideAlert}>
+            <div className="alert-header">Alert</div>
+            <div className="float card-body">
+              Token is invalidor has expired
             </div>
           </div>
         </div>

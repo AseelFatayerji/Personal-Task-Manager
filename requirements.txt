@@ -1,6 +1,6 @@
-Users can log in /sign up.  done
+Users can log in /sign up.  done/
 Users can create boards including columns (Todo/In progress…) done/
 Users can create tasks with titles, descriptions, attachments and tags. done/
 Users can create tags to use them while creating a task (It acts as a category)
-Users should be able to drag tasks between columns or edit the task directly.
-Users can view analytics (use charts) on a separate page.
+Users should be able to drag tasks between columns or edit the task directly. done/
+Users can view analytics (use charts) on a separate page. done/

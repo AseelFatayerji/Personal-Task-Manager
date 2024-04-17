@@ -11,8 +11,8 @@ const taskSlice = createSlice({
       return [...state, action.payload];
     },
     removeTask: (state, action) => {
-      const temp = state.task.filter((item) => {
-        if (item !== action.payload) {
+      const temp = state.filter((item) => {
+        if (item.title !== action.payload) {
           return item;
         }
       });

@@ -15,3 +15,29 @@
   color: black;
   cursor: pointer;
 }
+.alert-icon{
+  color:#ff9c9c
+}
+.alert-icon:hover{
+  cursor: pointer;
+}
+.alert {
+  border-radius: 22px;
+  border: 2px solid #ff9c9c;
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+  position: fixed;
+  left: 40%;
+  top: 20%;
+}
+
+.alert-header {
+  border-radius: 18px 18px 0px 0px;
+  background-color: #ff9c9c;
+  color: white;
+  font-size: 26px;
+  padding: 10px;
+  text-align: center;
+}
